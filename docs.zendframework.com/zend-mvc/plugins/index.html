@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <title>Controller Plugins - zend-mvc</title>
+
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
+    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="../css/base.css" rel="stylesheet">
+    <link href="../css/zf-web.css" rel="stylesheet">
+    <link href="../css/zf.css" rel="stylesheet">
+    <link href="../css/prism-zf.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+    <script>
+    WebFont.load({
+        google: {
+            families: ['Open Sans', 'PT Sans']
+        }
+    });
+    </script>
+
+    
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <span class="navbar-brand">
+              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
+              <a href="..">zend-mvc</a>
+            </span>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../intro/">Introduction</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../quick-start/">Quick Start</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reference <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../services/">Default Services</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../routing/">Routing</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../mvc-event/">The MVC Event</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../send-response-event/">The SendResponse Event</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../controllers/">Available Controllers</a>
+</li>
+
+                        
+                            
+<li class="active">
+    <a href="./">Controller Plugins</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../examples/">Examples</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../middleware/">Dispatching PSR-7 Middleware</a>
+</li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Migration</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../migration/">Migration Overview</a>
+</li>
+
+        
+            
+<li >
+    <a href="../migration/to-v2-7/">v2.X to v2.7</a>
+</li>
+
+        
+            
+<li >
+    <a href="../migration/to-v3-0/">v2.X to v3.0</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cookbook <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../cookbook/automating-controller-factories/">Automating controller factories</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../cookbook/middleware-in-listeners/">Using middleware within event listeners</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+            
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" class="component-toggle" data-toggle="tooltip" data-placement="bottom" title="Show component list">
+                        <i class="fa fa-book"></i> Components
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                
+                    <li>
+                        <a href="https://github.com/zendframework/zend-mvc">
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <!-- content:begin -->
+    <div id="page-top" class="container docs">
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#controller-plugins">Controller Plugins</a></li>
+        
+            <li><a href="#acceptableviewmodelselector-plugin">AcceptableViewModelSelector Plugin</a></li>
+        
+            <li><a href="#forward-plugin">Forward Plugin</a></li>
+        
+            <li><a href="#layout-plugin">Layout Plugin</a></li>
+        
+            <li><a href="#params-plugin">Params Plugin</a></li>
+        
+            <li><a href="#redirect-plugin">Redirect Plugin</a></li>
+        
+            <li><a href="#url-plugin">Url Plugin</a></li>
+        
+    
+    </ul>
+
+    
+    <ul class="pager hidden-print">
+      <li class="previous">
+        <a rel="prev" href="../controllers/"><i class="fa fa-arrow-left"></i> Previous</a>
+      </li>
+      <li class="next">
+        <a rel="next" href="../examples/">Next <i class="fa fa-arrow-right"></i></a>
+      </li>
+    </ul>
+    
+</div></div>
+        <div class="col-md-9" role="main">
+
+<ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
+  <li><a href="..">zend-mvc</a> &raquo;</li>
+  
+    
+      
+        <li>Reference &raquo;</li>
+      
+    
+  
+  <li class="active">Controller Plugins</li>
+</ol>
+
+<h1 id="controller-plugins">Controller Plugins</h1>
+<p>When using any of the abstract controller implementations shipped with zend-mvc,
+or if you implement the <code>setPluginManager</code> method in your custom controllers,
+you have access to a number of pre-built plugins. Additionally, you can register
+your own custom plugins with the manager.</p>
+<p>The built-in plugins are:</p>
+<ul>
+<li><a href="#acceptableviewmodelselector-plugin">Zend\Mvc\Controller\Plugin\AcceptableViewModelSelector</a></li>
+<li><a href="#forward-plugin">Zend\Mvc\Controller\Plugin\Forward</a></li>
+<li><a href="#layout-plugin">Zend\Mvc\Controller\Plugin\Layout</a></li>
+<li><a href="#params-plugin">Zend\Mvc\Controller\Plugin\Params</a></li>
+<li><a href="#redirect-plugin">Zend\Mvc\Controller\Plugin\Redirect</a></li>
+<li><a href="#url-plugin">Zend\Mvc\Controller\Plugin\Url</a></li>
+</ul>
+<p>If your controller implements the <code>setPluginManager()</code>, <code>getPluginManager()</code> and
+<code>plugin()</code> methods, you can access these using their shortname via the <code>plugin()</code>
+method:</p>
+<pre class="codehilite"><code class="language-php linenums">$plugin = $this-&gt;plugin('url');</code></pre>
+
+<p>For an extra layer of convenience, this shipped abstract controller
+implementations have <code>__call()</code> methods defined that allow you to retrieve
+plugins via method calls:</p>
+<pre class="codehilite"><code class="language-php linenums">$plugin = $this-&gt;url();</code></pre>
+
+<h2 id="acceptableviewmodelselector-plugin">AcceptableViewModelSelector Plugin</h2>
+<p>The <code>AcceptableViewModelSelector</code> is a helper that can be used to select an
+appropriate view model based on user defined criteria will be tested against the
+Accept header in the request.</p>
+<p>As an example:</p>
+<pre class="codehilite"><code class="language-php linenums">use Zend\Mvc\Controller\AbstractActionController;
+
+class SomeController extends AbstractActionController
+{
+    protected $acceptCriteria = [
+        \Zend\View\Model\ViewModel::class =&gt; [
+            'text/html',
+            'application/xhtml+xml',
+        ],
+        \Zend\View\Model\JsonModel::class =&gt; [
+            'application/json',
+            'application/javascript',
+        ],
+        \Zend\View\Model\FeedModel::class =&gt; [
+            'application/rss+xml',
+            'application/atom+xml',
+        ],
+    ];
+
+    public function apiAction()
+    {
+        $viewModel = $this-&gt;acceptableViewModelSelector($this-&gt;acceptCriteria);
+
+        // Potentially vary execution based on model returned
+        if ($viewModel instanceof \Zend\View\Model\JsonModel) {
+            // ...
+        }
+    }
+}</code></pre>
+
+<p>The above would return a standard <code>Zend\View\Model\ViewModel</code> instance if no
+criterias are met, and the specified view model types if a specific criteria
+is met. Rules are matched in order, with the first match "winning". 
+Make sure to put your fallback view model <em>first</em> as a fallback for unknown 
+content types or <code>*/*</code>.</p>
+<blockquote>
+<p>Browsers are sending <code>*/*</code> as last content type of the Accept header so you have to define every 
+acceptable view model and their content type.</p>
+</blockquote>
+<h2 id="forward-plugin">Forward Plugin</h2>
+<p>Occasionally, you may want to dispatch additional controllers from within the
+matched controller. For example, you might use this approach to build up
+"widgetized" content. The <code>Forward</code> plugin helps enable this.</p>
+<p>For the <code>Forward</code> plugin to work, the controller calling it must be
+<code>ServiceLocatorAware</code>; otherwise, the plugin will be unable to retrieve a
+configured and injected instance of the requested controller.</p>
+<p>The plugin exposes a single method, <code>dispatch()</code>, which takes two arguments:</p>
+<ul>
+<li><code>$name</code>, the name of the controller to invoke. This may be either the fully
+  qualified class name, or an alias defined and recognized by the
+  <code>ServiceManager</code> instance attached to the invoking controller.</li>
+<li><code>$params</code> is an optional array of parameters with which to seed a <code>RouteMatch</code>
+  object for purposes of this specific request. Meaning the parameters will be
+  matched by their key to the routing identifiers in the config (otherwise
+  non-matching keys are ignored)</li>
+</ul>
+<p><code>Forward</code> returns the results of dispatching the requested controller; it is up
+to the developer to determine what, if anything, to do with those results. One
+recommendation is to aggregate them in any return value from the invoking
+controller.</p>
+<p>As an example:</p>
+<pre class="codehilite"><code class="language-php linenums">$foo = $this-&gt;forward()-&gt;dispatch('foo', ['action' =&gt; 'process']);
+return [
+    'somekey' =&gt; $somevalue,
+    'foo'     =&gt; $foo,
+];</code></pre>
+
+<h2 id="layout-plugin">Layout Plugin</h2>
+<p>The <code>Layout</code> plugin allows changing layout templates from within controller actions.</p>
+<p>It exposes a single method, <code>setTemplate()</code>, which takes one argument,
+<code>$template</code>, the name of the template to set.</p>
+<p>As an example:</p>
+<pre class="codehilite"><code class="language-php linenums">$this-&gt;layout()-&gt;setTemplate('layout/newlayout');</code></pre>
+
+<p>It also implements the <code>__invoke</code> magic method, which allows calling the plugin
+as a method call:</p>
+<pre class="codehilite"><code class="language-php linenums">$this-&gt;layout('layout/newlayout');</code></pre>
+
+<h2 id="params-plugin">Params Plugin</h2>
+<p>The <code>Params</code> plugin allows accessing parameters in actions from different sources.</p>
+<p>It exposes several methods, one for each parameter source:</p>
+<ul>
+<li>
+<p><code>fromFiles(string $name = null, mixed $default = null): array|ArrayAccess|null</code>:
+  For retrieving all or one single <strong>file</strong>. If <code>$name</code> is null, all files will
+  be returned.</p>
+</li>
+<li>
+<p><code>fromHeader(string $header = null, mixed $default = null) : null|Zend\Http\Header\HeaderInterface</code>:
+  For retrieving all or one single <strong>header</strong> parameter. If <code>$header</code> is null,
+  all header parameters will be returned.</p>
+</li>
+<li>
+<p><code>fromPost(string $param = null, mixed $default = null) : mixed</code>: For
+  retrieving all or one single <strong>post</strong> parameter. If <code>$param</code> is null, all post
+  parameters will be returned.</p>
+</li>
+<li>
+<p><code>fromQuery(string $param = null, mixed $default = null) : mixed</code>: For
+  retrieving all or one single <strong>query</strong> parameter. If <code>$param</code> is null, all
+  query parameters will be returned.</p>
+</li>
+<li>
+<p><code>fromRoute(string $param = null, mixed $default = null) : mixed</code>: For
+  retrieving all or one single <strong>route</strong> parameter. If <code>$param</code> is null, all
+  route parameters will be returned.</p>
+</li>
+</ul>
+<p>The plugin also implements the <code>__invoke</code> magic method, providing a shortcut
+for invoking the <code>fromRoute</code> method:</p>
+<pre class="codehilite"><code class="language-php linenums">$this-&gt;params()-&gt;fromRoute('param', $default);
+// or
+$this-&gt;params('param', $default);</code></pre>
+
+<h2 id="redirect-plugin">Redirect Plugin</h2>
+<p>Redirections are quite common operations within applications. If done manually,
+you will need to do the following steps:</p>
+<ul>
+<li>Assemble a url using the router.</li>
+<li>Create and inject a "Location" header into the <code>Response</code> object, pointing to
+  the assembled URL.</li>
+<li>Set the status code of the <code>Response</code> object to one of the 3xx HTTP statuses.</li>
+</ul>
+<p>The <code>Redirect</code> plugin does this work for you. It offers three methods:</p>
+<ul>
+<li>
+<p><code>toRoute(string $route = null, array $params = array(), array $options = array(), boolean $reuseMatchedParams = false) : Zend\Http\Response</code>:
+  Redirects to a named route, using the provided <code>$params</code> and <code>$options</code> to
+  assembled the URL.</p>
+</li>
+<li>
+<p><code>toUrl(string $url) : Zend\Http\Response</code>: Simply redirects to the given URL.</p>
+</li>
+<li>
+<p><code>refresh() : Zend\Http\Response</code>: Refresh to current route.</p>
+</li>
+</ul>
+<p>In each case, the <code>Response</code> object is returned. If you return this immediately,
+you can effectively short-circuit execution of the request.</p>
+<blockquote>
+<h3 id="requires-mvcevent">Requires MvcEvent</h3>
+<p>This plugin requires that the controller invoking it implements
+<code>InjectApplicationEventInterface</code>, and thus has an <code>MvcEvent</code> composed, as it
+retrieves the router from the event object.</p>
+</blockquote>
+<p>As an example:</p>
+<pre class="codehilite"><code class="language-php linenums">return $this-&gt;redirect()-&gt;toRoute('login-success');</code></pre>
+
+<h2 id="url-plugin">Url Plugin</h2>
+<p>You may need to generate URLs from route definitions within your controllers;
+for example, to seed the view, generate headers, etc. While the <code>MvcEvent</code>
+object composes the router, doing so manually would require this workflow:</p>
+<pre class="codehilite"><code class="language-php linenums">$router = $this-&gt;getEvent()-&gt;getRouter();
+$url    = $router-&gt;assemble($params, ['name' =&gt; 'route-name']);</code></pre>
+
+<p>The <code>Url</code> helper makes this slightly more convenient:</p>
+<pre class="codehilite"><code class="language-php linenums">$url = $this-&gt;url()-&gt;fromRoute('route-name', $params);</code></pre>
+
+<p>The <code>fromRoute()</code> method is the only public method defined, and is used to
+generate a URL string from the provided parameters. It has the following
+signature:</p>
+<ul>
+<li><code>fromRoute(string $route = null, array $params = [], array $options = [], bool $reuseMatchedParams = false): string</code>, where:</li>
+<li><code>$name</code>: the name of the route to use for URL generation.</li>
+<li><code>$params</code>: Any parameter substitutions to use with the named route.</li>
+<li><code>$options</code>: Options used by the router when generating the URL (e.g., <code>force_canonical</code>, <code>query</code>, etc.).</li>
+<li><code>$reuseMatchedParams</code>: Whether or not to use route match parameters from the
+    current URL when generating the new URL. This will only affect cases where
+    the specified <code>$name</code> matches the currently matched route; the default is
+    <code>true</code>.</li>
+</ul>
+<blockquote>
+<h3 id="requires-mvcevent_1">Requires MvcEvent</h3>
+<p>This plugin requires that the controller invoking it implements
+<code>InjectApplicationEventInterface</code>, and thus has an <code>MvcEvent</code> composed, as it
+retrieves the router from the event object.</p>
+</blockquote>
+
+<hr />
+
+
+<nav>
+  <ul class="pager hidden-print">
+    <li class="previous">
+      <a rel="prev" href="../controllers/"><i class="fa fa-arrow-left"></i> Previous</a>
+    </li>
+    <li class="next">
+      <a rel="next" href="../examples/">Next <i class="fa fa-arrow-right"></i></a>
+    </li>
+  </ul>
+</nav>
+</div>
+        
+    </div>
+    <!-- content:end -->
+
+    <div id="footerwrap">
+    <div class="container">
+        <div class="row site-map">
+            <div class="col-lg-3">
+              <p>
+                <strong>Zend Framework</strong><br />
+                <a href="http://framework.zend.com/">framework.zend.com</a><br />
+                <a href="https://docs.zendframework.com">docs.zendframework.com</a><br />
+                <a href="https://packages.zendframework.com">packages.zendframework.com</a><br />
+                <a href="https://apigility.org">apigility.org</a><br />
+              </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 centered">
+                <a class="back-to-top" href="#page-top"><i class="fa fa-chevron-circle-up fa-4" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="spacing"></div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <h4>Copyright</h4>
+                <div class="hline-w"></div>
+
+                <p>&copy; 2006-2016 by <a href="http://www.zend.com">Zend</a>, a <a href="http://www.roguewave.com/">Rogue Wave Company</a>.</p>
+            </div>
+
+            <div class="col-lg-4">
+                <h4>Contacts</h4>
+                <div class="hline-w"></div>
+                <p>
+                    <a href="irc://irc.freenode.net/zftalk" class="btn-social btn-outline" alt="IRC" title="IRC"><i class="fa fa-comment"></i></a>
+                    <a href="https://github.com/zendframework" class="btn-social btn-outline" alt="Github" title="Github"><i class="fa fa-github"></i></a>
+                    <a href="https://twitter.com/zfdevteam" class="btn-social btn-outline" alt="Twitter" title="Twitter"><i class="fa fa-twitter"></i></a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <script src="../js/jquery-1.10.2.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+    <script src="../js/prism-zf.js"></script>
+
+    <script>var base_url = '..';</script>
+    <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+    <script src="../js/base.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        From here you can search these documents. Enter your search terms below.
+                    </p>
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        </div>
+                    </form>
+                    <div id="mkdocs-search-results"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="zf-components">
+  <div class="zf-components-grid">
+    <div class="zf-logo">
+      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
+    </div>
+
+    <div class="component-list"></div>
+
+    <p class="zf-components-rollup"><a href="#">Hide list</a></p>
+  </div>
+</div>
+
+    <script>
+  // Prepare the component list dropdown for display
+  $(function () {
+    var components = $(".zf-components"),
+        componentList = components.find(".component-list"),
+        sidebar = $(".bs-sidebar.affix"),
+        sidebarInitialPos = sidebar.css("position"),
+        hidden,
+        componentToggle = $(".component-toggle"),
+        navbar = $(".navbar-fixed-top"),
+        rollUpLink = $(".zf-components-rollup a");
+
+    // Initial setup on document load
+    components.insertBefore(navbar);
+    $(".zf-logo a").tooltip();
+    componentToggle.tooltip();
+    rollUpLink.attr({ href: "#", alt: "Hide component list" });
+
+    // Cast initial sidebar position value
+    if (undefined === sidebarInitialPos) {
+      sidebarInitialPos = "fixed";
+    }
+
+    // Setup onclick events to toggle list
+    componentToggle.click(toggleComponentList);
+    rollUpLink.click(toggleComponentList);
+
+    // Toggle the component list display
+    function toggleComponentList(event) {
+      event.preventDefault();
+
+      if (hidden === undefined) {
+        // Not loaded yet; load and display.
+        loadComponentList();
+        return;
+      }
+
+      if (hidden) {
+        // Hidden; display.
+        showComponentList();
+        return;
+      }
+
+      // Currently visible; hide
+      hideComponentList();
+    }
+
+    // Show the component list
+    function showComponentList() {
+      navbar.css({position: "relative"});
+      sidebar.css({position: "relative"});
+      components
+        .css({"margin-top": "-" + components.outerHeight() + "px"})
+        .show()
+        .animate({"margin-top": 0}, {
+          complete: function () {
+            componentToggle
+              .data("placement", "top")
+              .attr("data-original-title", "Hide component list");
+            hidden = false;
+          },
+          queue: false
+        });
+    }
+
+    // Hide the component list
+    function hideComponentList() {
+      components.animate({"margin-top": "-" + components.outerHeight() + "px"}, {
+        complete: function () {
+          navbar.css({position: "fixed"});
+          sidebar.css({position: sidebarInitialPos});
+          componentToggle
+            .data("placement", "bottom")
+            .attr("data-original-title", "Show component list");
+          components.hide();
+          hidden = true;
+        },
+        queue: false
+      });
+      sidebar.animate({ top: sidebarInitialTop + "px" }, { queue: false});
+    }
+
+    // Inject a component into the componet list DOM.
+    function injectComponent(index, component) {
+      componentList.append('<div class="component"><h4><a href="' + component.url + '">' + component.name + '</a></h4><p>' + component.description + '</p></div>');
+    }
+
+    // Parse the component list, build the DOM, and display it.
+    function parseComponentList(components) {
+      $.each(components, injectComponent);
+      showComponentList();
+    }
+
+    // Fetch the component list and display it.
+    function loadComponentList () {
+      $.ajax({
+        url: "//docs.zendframework.com/zf-mkdoc-theme/scripts/zf-component-list.json",
+        dataType: "text json",
+        success: parseComponentList,
+        error: function (e) {
+          console.log("Error occurred with XHR call", e);
+        }
+      });
+    }
+  });
+</script>
+    </body>
+
+</html>

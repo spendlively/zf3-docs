@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="zend-mail">  
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <title>Intro - zend-mail</title>
+
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/fontawesome/4.6.3/css/font-awesome.min.css" integrity="sha256-AIodEDkC8V/bHBkfyxzolUMw57jeQ9CauwhVW6YJ9CA=" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/styles-482aa2add1.css">
+
+    
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <span class="navbar-brand">
+              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
+              <a href="..">zend-mail</a>
+            </span>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="active">
+                        <a href="./">Intro</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reference <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Messages</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../message/intro/">Intro and Usage</a>
+</li>
+
+        
+            
+<li >
+    <a href="../message/attachments/">Attachments</a>
+</li>
+
+        
+            
+<li >
+    <a href="../message/character-sets/">Character Sets</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Transports</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../transport/intro/">Usage</a>
+</li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">SMTP</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../transport/smtp-options/">SMTP Options</a>
+</li>
+
+        
+            
+<li >
+    <a href="../transport/smtp-multiple-send/">Sending multiple messages</a>
+</li>
+
+        
+            
+<li >
+    <a href="../transport/smtp-authentication/">Authentication</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+            
+<li >
+    <a href="../transport/file-options/">File Transport Options</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+<li >
+    <a href="../read/">Reading and Storing Mail</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+            
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" class="component-toggle" data-toggle="tooltip" data-placement="bottom" title="Show component list">
+                        <i class="fa fa-book"></i> Components
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                
+                    <li>
+                        <a href="https://github.com/zendframework/zend-mail">
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <!-- content:begin -->
+    <div id="page-top" class="container docs">
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#introduction">Introduction</a></li>
+        
+            <li><a href="#basic-email">Basic email</a></li>
+        
+            <li><a href="#configuring-the-default-sendmail-transport">Configuring the default sendmail transport</a></li>
+        
+    
+    </ul>
+
+    
+    <ul class="pager hidden-print">
+      <li class="previous">
+        <a rel="prev" href=".."><i class="fa fa-arrow-left"></i> Previous</a>
+      </li>
+      <li class="next">
+        <a rel="next" href="../message/intro/">Next <i class="fa fa-arrow-right"></i></a>
+      </li>
+    </ul>
+    
+</div></div>
+        <div class="col-md-9" role="main">
+
+<ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
+  <li><a href="..">zend-mail</a></li>
+  
+    
+  
+  <li class="active">Intro</li>
+</ol>
+
+<h1 id="introduction">Introduction</h1>
+<p>zend-mail provides generalized functionality to compose and send both text and
+MIME-compliant multipart email messages. Mail can be sent with zend-mail via any
+of the Sendmail, SMTP, or file-based transports it defines.  You can also
+implement your own transport by implementing the
+<code>Zend\Mail\Transport\TransportInterface</code>.</p>
+<h2 id="basic-email">Basic email</h2>
+<p>A basic email consists of one or more recipients, a subject, a body and a
+sender. To send such a mail using <code>Zend\Mail\Transport\Sendmail</code>, do the
+following:</p>
+<pre class="codehilite"><code class="language-php">use Zend\Mail;
+
+$mail = new Mail\Message();
+$mail-&gt;setBody('This is the text of the email.');
+$mail-&gt;setFrom('Freeaqingme@example.org', &quot;Sender's name&quot;);
+$mail-&gt;addTo('Matthew@example.com', 'Name of recipient');
+$mail-&gt;setSubject('TestSubject');
+
+$transport = new Mail\Transport\Sendmail();
+$transport-&gt;send($mail);</code></pre>
+
+<blockquote>
+<h3 id="minimum-definitions">Minimum definitions</h3>
+<p>In order to send an email using zend-mail you have to specify at least one
+recipient as well as a message body. Please note that each transport may
+require additional parameters to be set.</p>
+</blockquote>
+<p>For most mail attributes there are "get" methods to read the information stored
+in the message object. for further details, please refer to the API
+documentation.</p>
+<h2 id="configuring-the-default-sendmail-transport">Configuring the default sendmail transport</h2>
+<p>The default transport is <code>Zend\Mail\Transport\Sendmail</code>. It is a wrapper to the
+PHP <a href="http://php.net/mail">mail()</a> function. If you wish to pass additional
+parameters to the <a href="http://php.net/mail">mail()</a> function, create a new transport
+instance and pass your parameters to the constructor.</p>
+<h3 id="passing-additional-mail-parameters">Passing additional mail() parameters</h3>
+<p>This example shows how to change the Return-Path of the
+<a href="http://php.net/mail">mail()</a> function.</p>
+<pre class="codehilite"><code class="language-php">use Zend\Mail;
+
+$mail = new Mail\Message();
+$mail-&gt;setBody('This is the text of the email.');
+$mail-&gt;setFrom('Freeaqingme@example.org', 'Dolf');
+$mail-&gt;addTo('matthew@example.com', 'Matthew');
+$mail-&gt;setSubject('TestSubject');
+
+$transport = new Mail\Transport\Sendmail('-freturn_to_me@example.com');
+$transport-&gt;send($mail);</code></pre>
+
+<blockquote>
+<h3 id="chose-your-transport-wisely">Chose your transport wisely</h3>
+<p>Although the sendmail transport is the transport that requires least
+configuration, it may not be suitable for your production environment. This is
+because emails sent using the sendmail transport will be more often delivered
+to SPAM-boxes. This can partly be remedied by using the
+<a href="../transport/intro/#smtp-transport-usage">SMTP Transport</a> combined with an SMTP
+server that has an overall good reputation. Additionally, techniques such as
+SPF and DKIM may be employed to ensure even more email messages are delivered
+successfully.</p>
+<h3 id="warning-sendmail-transport-and-windows">Warning: Sendmail Transport and Windows</h3>
+<p>As the PHP manual states, the <code>mail()</code> function has different behaviour on
+Windows than it does on *nix based systems. Using the sendmail transport on
+Windows will not work in combination with <code>addBcc()</code>.  The <code>mail()</code> function
+will send to the BCC recipient such that all the other recipients can see that
+address as the recipient!</p>
+<p>Therefore if you want to use BCC on a windows server, use the SMTP transport
+for sending!</p>
+</blockquote>
+
+<hr />
+
+
+<nav>
+  <ul class="pager hidden-print">
+    <li class="previous">
+      <a rel="prev" href=".."><i class="fa fa-arrow-left"></i> Previous</a>
+    </li>
+    <li class="next">
+      <a rel="next" href="../message/intro/">Next <i class="fa fa-arrow-right"></i></a>
+    </li>
+  </ul>
+</nav>
+</div>
+        
+    </div>
+    <!-- content:end -->
+
+    <div id="footerwrap">
+    <div class="container">
+        <div class="row site-map">
+            <div class="col-lg-3">
+              <p>
+                <strong>Zend Framework</strong><br />
+                <a href="http://framework.zend.com/">framework.zend.com</a><br />
+                <a href="https://docs.zendframework.com">docs.zendframework.com</a><br />
+                <a href="https://packages.zendframework.com">packages.zendframework.com</a><br />
+                <a href="https://apigility.org">apigility.org</a><br />
+              </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 centered">
+                <a class="back-to-top" href="#page-top"><i class="fa fa-chevron-circle-up fa-4" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="spacing"></div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <h4>Copyright</h4>
+                <div class="hline-w"></div>
+
+                <p>&copy; 2006-2016 by <a href="http://www.zend.com">Zend</a>, a <a href="http://www.roguewave.com/">Rogue Wave Company</a>.</p>
+            </div>
+
+            <div class="col-lg-4">
+                <h4>Contacts</h4>
+                <div class="hline-w"></div>
+                <p>
+                    <a href="irc://irc.freenode.net/zftalk" class="btn-social btn-outline" alt="IRC" title="IRC"><i class="fa fa-comment"></i></a>
+                    <a href="https://github.com/zendframework" class="btn-social btn-outline" alt="Github" title="Github"><i class="fa fa-github"></i></a>
+                    <a href="https://twitter.com/zfdevteam" class="btn-social btn-outline" alt="Twitter" title="Twitter"><i class="fa fa-twitter"></i></a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo=" crossorigin="anonymous"></script>
+    <script>var base_url = '..';</script>
+    <script src="../js/scripts-8b95ab2fc3.js"></script>
+    <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        From here you can search these documents. Enter your search terms below.
+                    </p>
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        </div>
+                    </form>
+                    <div id="mkdocs-search-results"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="zf-components">
+  <div class="zf-components-grid">
+    <div class="zf-logo">
+      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
+    </div>
+
+    <div class="component-list"></div>
+
+    <p class="zf-components-rollup"><a href="#">Hide list</a></p>
+  </div>
+</div>
+
+</body>
+
+</html>

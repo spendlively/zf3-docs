@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="zend-mail">  
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+
+    <title>Sending multiple messages - zend-mail</title>
+
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/fontawesome/4.6.3/css/font-awesome.min.css" integrity="sha256-AIodEDkC8V/bHBkfyxzolUMw57jeQ9CauwhVW6YJ9CA=" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../css/styles-482aa2add1.css">
+
+    
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <span class="navbar-brand">
+              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
+              <a href="../..">zend-mail</a>
+            </span>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="../..">Home</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../../intro/">Intro</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reference <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Messages</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../message/intro/">Intro and Usage</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../message/attachments/">Attachments</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../message/character-sets/">Character Sets</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Transports</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../intro/">Usage</a>
+</li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">SMTP</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../smtp-options/">SMTP Options</a>
+</li>
+
+        
+            
+<li class="active">
+    <a href="./">Sending multiple messages</a>
+</li>
+
+        
+            
+<li >
+    <a href="../smtp-authentication/">Authentication</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+            
+<li >
+    <a href="../file-options/">File Transport Options</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+<li >
+    <a href="../../read/">Reading and Storing Mail</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+            
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" class="component-toggle" data-toggle="tooltip" data-placement="bottom" title="Show component list">
+                        <i class="fa fa-book"></i> Components
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                
+                    <li>
+                        <a href="https://github.com/zendframework/zend-mail">
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <!-- content:begin -->
+    <div id="page-top" class="container docs">
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#sending-multiple-mails-per-smtp-connection">Sending Multiple Mails per SMTP Connection</a></li>
+        
+            <li><a href="#examples">Examples</a></li>
+        
+    
+    </ul>
+
+    
+    <ul class="pager hidden-print">
+      <li class="previous">
+        <a rel="prev" href="../smtp-options/"><i class="fa fa-arrow-left"></i> Previous</a>
+      </li>
+      <li class="next">
+        <a rel="next" href="../smtp-authentication/">Next <i class="fa fa-arrow-right"></i></a>
+      </li>
+    </ul>
+    
+</div></div>
+        <div class="col-md-9" role="main">
+
+<ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
+  <li><a href="../..">zend-mail</a></li>
+  
+    
+      
+        <li>Transports</li>
+      
+    
+      
+        <li>SMTP</li>
+      
+    
+  
+  <li class="active">Sending multiple messages</li>
+</ol>
+
+<h1 id="sending-multiple-mails-per-smtp-connection">Sending Multiple Mails per SMTP Connection</h1>
+<p>By default, a single SMTP transport creates a single connection and re-uses it
+for the lifetime of the script execution. You may send multiple e-mails through
+this SMTP connection. A <code>RSET</code> command is issued before each delivery to ensure
+the correct SMTP handshake is followed.</p>
+<h2 id="examples">Examples</h2>
+<h3 id="sending-multiple-mails-per-smtp-connection_1">Sending Multiple Mails per SMTP Connection</h3>
+<pre class="codehilite"><code class="language-php">use Zend\Mail\Message;
+use Zend\Mail\Transport\Smtp;
+
+// Create transport
+$transport = new Smtp([
+    'host' =&gt; 'mail.example.com'
+]);
+
+// Create a base message:
+$template = new Message();
+$template-&gt;addFrom('sender@example.com', 'John Doe');
+$template-&gt;addReplyTo('replyto@example.com', 'Jane Doe');
+$template-&gt;setSubject('Demo of multiple mails per SMTP connection');
+$template-&gt;setBody('... Your message here ...');
+
+// Loop through recipients:
+foreach ($recipients as $address) {
+    // Clone the message and add a recipient:
+    $message = clone $template;
+    $message-&gt;addTo($template);
+
+    $transport-&gt;send($message);
+}</code></pre>
+
+<p>If you wish to have a separate connection for each mail delivery, you will need
+to create and destroy your transport before and after each <code>send()</code> method is
+called.</p>
+<h3 id="manipulating-the-transport-between-messages">Manipulating the transport between messages</h3>
+<p>You can manipulate the connection between each delivery by accessing the
+transport's protocol object.</p>
+<pre class="codehilite"><code class="language-php">use Zend\Mail\Message;
+use Zend\Mail\Protocol\Smtp as SmtpProtocol;
+use Zend\Mail\Transport\Smtp as SmtpTransport;
+
+// Create transport
+$transport = new SmtpTransport();
+
+$protocol = new SmtpProtocol('mail.example.com');
+$protocol-&gt;connect();
+$protocol-&gt;helo('sender.example.com');
+
+$transport-&gt;setConnection($protocol);
+
+// Loop through messages
+foreach ($recipients as $address) {
+    $mail = new Message();
+    $mail-&gt;addTo($address);
+    $mail-&gt;setFrom('studio@example.com', 'Test');
+    $mail-&gt;setSubject(
+        'Demonstration - Sending Multiple Mails per SMTP Connection'
+    );
+    $mail-&gt;setBodyText('...Your message here...');
+
+    // Manually control the connection
+    $protocol-&gt;rset();
+    $transport-&gt;send($message);
+}
+
+$protocol-&gt;quit();
+$protocol-&gt;disconnect();</code></pre>
+
+<hr />
+
+
+<nav>
+  <ul class="pager hidden-print">
+    <li class="previous">
+      <a rel="prev" href="../smtp-options/"><i class="fa fa-arrow-left"></i> Previous</a>
+    </li>
+    <li class="next">
+      <a rel="next" href="../smtp-authentication/">Next <i class="fa fa-arrow-right"></i></a>
+    </li>
+  </ul>
+</nav>
+</div>
+        
+    </div>
+    <!-- content:end -->
+
+    <div id="footerwrap">
+    <div class="container">
+        <div class="row site-map">
+            <div class="col-lg-3">
+              <p>
+                <strong>Zend Framework</strong><br />
+                <a href="http://framework.zend.com/">framework.zend.com</a><br />
+                <a href="https://docs.zendframework.com">docs.zendframework.com</a><br />
+                <a href="https://packages.zendframework.com">packages.zendframework.com</a><br />
+                <a href="https://apigility.org">apigility.org</a><br />
+              </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 centered">
+                <a class="back-to-top" href="#page-top"><i class="fa fa-chevron-circle-up fa-4" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="spacing"></div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <h4>Copyright</h4>
+                <div class="hline-w"></div>
+
+                <p>&copy; 2006-2016 by <a href="http://www.zend.com">Zend</a>, a <a href="http://www.roguewave.com/">Rogue Wave Company</a>.</p>
+            </div>
+
+            <div class="col-lg-4">
+                <h4>Contacts</h4>
+                <div class="hline-w"></div>
+                <p>
+                    <a href="irc://irc.freenode.net/zftalk" class="btn-social btn-outline" alt="IRC" title="IRC"><i class="fa fa-comment"></i></a>
+                    <a href="https://github.com/zendframework" class="btn-social btn-outline" alt="Github" title="Github"><i class="fa fa-github"></i></a>
+                    <a href="https://twitter.com/zfdevteam" class="btn-social btn-outline" alt="Twitter" title="Twitter"><i class="fa fa-twitter"></i></a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo=" crossorigin="anonymous"></script>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/scripts-8b95ab2fc3.js"></script>
+    <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        From here you can search these documents. Enter your search terms below.
+                    </p>
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        </div>
+                    </form>
+                    <div id="mkdocs-search-results"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="zf-components">
+  <div class="zf-components-grid">
+    <div class="zf-logo">
+      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
+    </div>
+
+    <div class="component-list"></div>
+
+    <p class="zf-components-rollup"><a href="#">Hide list</a></p>
+  </div>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Problem Details for PSR-7 Applications">  
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <title>Exceptions - Problem Details</title>
+
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/fontawesome/4.6.3/css/font-awesome.min.css" integrity="sha256-AIodEDkC8V/bHBkfyxzolUMw57jeQ9CauwhVW6YJ9CA=" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/styles-482aa2add1.css">
+
+    
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <span class="navbar-brand">
+              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
+              <a href="..">Problem Details</a>
+            </span>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../intro/">Introduction</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../quick-start/">Quick Start</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reference <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../response/">Generating Responses</a>
+</li>
+
+                        
+                            
+<li class="active">
+    <a href="./">Exceptions</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../middleware/">Error Handling Middleware</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+            
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" class="component-toggle" data-toggle="tooltip" data-placement="bottom" title="Show component list">
+                        <i class="fa fa-book"></i> Components
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                
+                    <li>
+                        <a href="https://github.com/zendframework/zend-problem-details">
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <!-- content:begin -->
+    <div id="page-top" class="container docs">
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#problem-details-exceptions">Problem Details Exceptions</a></li>
+        
+    
+    </ul>
+
+    
+    <ul class="pager hidden-print">
+      <li class="previous">
+        <a rel="prev" href="../response/"><i class="fa fa-arrow-left"></i> Previous</a>
+      </li>
+      <li class="next">
+        <a rel="next" href="../middleware/">Next <i class="fa fa-arrow-right"></i></a>
+      </li>
+    </ul>
+    
+</div></div>
+        <div class="col-md-9" role="main">
+
+<ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
+  <li><a href="..">Problem Details</a></li>
+  
+    
+      
+        <li>Reference</li>
+      
+    
+  
+  <li class="active">Exceptions</li>
+</ol>
+
+<h1 id="problem-details-exceptions">Problem Details Exceptions</h1>
+<p>If you are developing an API, it may be useful to raise exceptions from your
+business domain that contain all the information necessary to report problem
+details.</p>
+<p>To facilitate this, we provide an interface, <code>ProblemDetailsException</code>:</p>
+<pre class="codehilite"><code class="language-php">namespace Zend\ProblemDetails\Exception;
+
+use JsonSerializable;
+
+interface ProblemDetailsException extends JsonSerializable
+{
+    public function getStatus() : int;
+
+    public function getType() : string;
+
+    public function getTitle() : string;
+
+    public function getDetail() : string;
+
+    public function getAdditionalData() : array;
+
+    public function toArray() : array;
+}</code></pre>
+
+<p>You may create exceptions that implement this interface. When such exceptions
+are passed to <code>ProblemDetailsResponseFactory::createResponseFromThrowable()</code>,
+these will pull the relevant details in order to create a Problem Details
+response.</p>
+<p>To facilitate creating such exception types, we also ship the trait
+<code>CommonProblemDetailsException</code>. This trait defines the following properties:</p>
+<ul>
+<li><code>$status</code></li>
+<li><code>$detail</code></li>
+<li><code>$title</code></li>
+<li><code>$type</code></li>
+<li><code>$additional</code></li>
+</ul>
+<p>and implements each of the methods of the interface. This allows you as a
+developer to create implementations with either constructors or named
+constructors for generating exception instances.</p>
+<p>As an example, if you wanted to create an exception type for providing
+transaction problem details, you might do so as follows:</p>
+<pre class="codehilite"><code class="language-php">use DomainException;
+use Zend\ProblemDetails\Exception\CommonProblemDetailsException;
+use Zend\ProblemDetails\Exception\ProblemDetailsException;
+
+class TransactionException extends DomainException implements ProblemDetailsException
+{
+    use CommonProblemDetailsException;
+
+    const STATUS = 403;
+    const TYPE = 'https://example.com/problems/insufficient-funds';
+    const TITLE = 'You have insufficient funds to complete the transaction.';
+
+    public static function create(int $needed, float $balance, string $account) : self
+    {
+        $e = new self(sprintf(
+            'Your transaction required %01.2f, but you only have %01.2f in your account',
+            $needed,
+            $balance
+        ));
+        $e-&gt;status = self::STATUS;
+        $e-&gt;type   = self::TYPE;
+        $e-&gt;title  = self::TITLE;
+        $e-&gt;additional = [
+            'account' =&gt; $account,
+            'balance' =&gt; $balance,
+        ];
+
+        return $e;
+    }
+}</code></pre>
+
+<p>You might then raise the exception as follows:</p>
+<pre class="codehilite"><code class="language-php">throw TransactionException::create($price, $balance, $accountUri);</code></pre>
+
+<p>And it might result in the following:</p>
+<pre class="codehilite"><code class="language-json">{
+    &quot;status&quot;: 403,
+    &quot;type&quot;: &quot;https://example.com/problems/insufficient-funds&quot;,
+    &quot;title&quot;: &quot;You have insufficient funds to complete the transaction.&quot;,
+    &quot;detail&quot;: &quot;Your transaction required 5.63, but you only have 1.37 in your account&quot;,
+    &quot;account&quot;: &quot;https://example.com/api/accounts/12345&quot;,
+    &quot;balance&quot;: 1.37
+}</code></pre>
+
+<p>The benefit to this approach is that you can easily provide domain-specific
+exceptions throughout your application that can, as a side-effect, be
+re-purposed immediately to provide problem details in your application.</p>
+
+<hr />
+
+
+<nav>
+  <ul class="pager hidden-print">
+    <li class="previous">
+      <a rel="prev" href="../response/"><i class="fa fa-arrow-left"></i> Previous</a>
+    </li>
+    <li class="next">
+      <a rel="next" href="../middleware/">Next <i class="fa fa-arrow-right"></i></a>
+    </li>
+  </ul>
+</nav>
+</div>
+        
+    </div>
+    <!-- content:end -->
+
+    <div id="footerwrap">
+    <div class="container">
+        <div class="row site-map">
+            <div class="col-lg-3">
+              <p>
+                <strong>Zend Framework</strong><br />
+                <a href="http://framework.zend.com/">framework.zend.com</a><br />
+                <a href="https://docs.zendframework.com">docs.zendframework.com</a><br />
+                <a href="https://packages.zendframework.com">packages.zendframework.com</a><br />
+                <a href="https://apigility.org">apigility.org</a><br />
+              </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 centered">
+                <a class="back-to-top" href="#page-top"><i class="fa fa-chevron-circle-up fa-4" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="spacing"></div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <h4>Copyright</h4>
+                <div class="hline-w"></div>
+
+                <p>&copy; 2006-2016 by <a href="http://www.zend.com">Zend</a>, a <a href="http://www.roguewave.com/">Rogue Wave Company</a>.</p>
+            </div>
+
+            <div class="col-lg-4">
+                <h4>Contacts</h4>
+                <div class="hline-w"></div>
+                <p>
+                    <a href="irc://irc.freenode.net/zftalk" class="btn-social btn-outline" alt="IRC" title="IRC"><i class="fa fa-comment"></i></a>
+                    <a href="https://github.com/zendframework" class="btn-social btn-outline" alt="Github" title="Github"><i class="fa fa-github"></i></a>
+                    <a href="https://twitter.com/zfdevteam" class="btn-social btn-outline" alt="Twitter" title="Twitter"><i class="fa fa-twitter"></i></a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo=" crossorigin="anonymous"></script>
+    <script>var base_url = '..';</script>
+    <script src="../js/scripts-8b95ab2fc3.js"></script>
+    <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        From here you can search these documents. Enter your search terms below.
+                    </p>
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        </div>
+                    </form>
+                    <div id="mkdocs-search-results"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="zf-components">
+  <div class="zf-components-grid">
+    <div class="zf-logo">
+      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
+    </div>
+
+    <div class="component-list"></div>
+
+    <p class="zf-components-rollup"><a href="#">Hide list</a></p>
+  </div>
+</div>
+
+</body>
+
+</html>
